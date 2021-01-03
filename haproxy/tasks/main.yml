@@ -1,0 +1,18 @@
+---
+# tasks file for haproxy
+
+   - name: "Installing HAProxy"
+     package: 
+       name: "{{ software_name }}"
+  
+   - name: "Configuration"
+     template:
+       dest: "/etc/haproxy/haproxy.cfg"
+       src: "/root/roles/haproxy/templates/haproxy.cfg.j2"
+     notify: "restarted services"
+
+
+   - name: "Starting Services" 
+     service:
+        name: "{{ software_name }}"
+        state: started
